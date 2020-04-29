@@ -244,6 +244,12 @@ public:
                                                   unsigned ExtraPrefixArgs,
                                                   unsigned ExtraSuffixArgs,
                                                   bool PassProtoArgs = true);
+  const CGFunctionInfo &arrangeCXXConstructorCall(ArrayRef<CanQualType> ArgTypes,
+                                                  const CXXConstructorDecl *D,
+                                                  CXXCtorType CtorKind,
+                                                  unsigned ExtraPrefixArgs,
+                                                  unsigned ExtraSuffixArgs,
+                                                  bool PassProtoArgs = true);
 
   const CGFunctionInfo &arrangeCXXMethodCall(const CallArgList &args,
                                              const FunctionProtoType *type,

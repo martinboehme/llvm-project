@@ -63,6 +63,15 @@ CodeGen::arrangeFreeFunctionCall(CodeGenModule &CGM,
       info, {}, args);
 }
 
+const CGFunctionInfo &
+CodeGen::arrangeCXXConstructorCall(CodeGenModule &CGM,
+                                   const CXXConstructorDecl *CD,
+                                   ArrayRef<CanQualType> argTypes,
+                                   FunctionType::ExtInfo info) {
+  return CGM.getTypes().arrangeCXXConstructorCall(argTypes, CD, Ctor_Complete, 0, 0);
+}
+
+
 llvm::FunctionType *
 CodeGen::convertFreeFunctionType(CodeGenModule &CGM, const FunctionDecl *FD) {
   assert(FD != nullptr && "Expected a non-null function declaration!");

@@ -398,6 +398,16 @@ CodeGenTypes::arrangeCXXConstructorCall(const CallArgList &args,
   for (const auto &Arg : args)
     ArgTypes.push_back(Context.getCanonicalParamType(Arg.Ty));
 
+  return arrangeCXXConstructorCall(ArgTypes, D, CtorKind, ExtraPrefixArgs, ExtraSuffixArgs, PassProtoArgs);
+}
+
+const CGFunctionInfo &
+CodeGenTypes::arrangeCXXConstructorCall(ArrayRef<CanQualType> ArgTypes,
+                                        const CXXConstructorDecl *D,
+                                        CXXCtorType CtorKind,
+                                        unsigned ExtraPrefixArgs,
+                                        unsigned ExtraSuffixArgs,
+                                        bool PassProtoArgs) {
   // +1 for implicit this, which should always be args[0].
   unsigned TotalPrefixArgs = 1 + ExtraPrefixArgs;
 

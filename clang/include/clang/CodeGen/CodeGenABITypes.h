@@ -38,6 +38,7 @@ namespace llvm {
 
 namespace clang {
 class ASTContext;
+class CXXConstructorDecl;
 class CXXRecordDecl;
 class CXXMethodDecl;
 class CodeGenOptions;
@@ -72,6 +73,11 @@ const CGFunctionInfo &arrangeFreeFunctionCall(CodeGenModule &CGM,
                                               ArrayRef<CanQualType> argTypes,
                                               FunctionType::ExtInfo info,
                                               RequiredArgs args);
+
+const CGFunctionInfo &arrangeCXXConstructorCall(CodeGenModule &CGM,
+                                                const CXXConstructorDecl *CD,
+                                                ArrayRef<CanQualType> argTypes,
+                                                FunctionType::ExtInfo info);
 
 /// Returns null if the function type is incomplete and can't be lowered.
 llvm::FunctionType *convertFreeFunctionType(CodeGenModule &CGM,
